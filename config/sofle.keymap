@@ -16,6 +16,7 @@
 #define RAISE 2
 #define ADJUST 3
 
+#define FR_LPRN N5    // (
 #define FR_5    S(FR_LPRN) // 5
 
 
