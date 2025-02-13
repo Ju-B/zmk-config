@@ -12,10 +12,10 @@
 #include "keys_fr.h"
 
 #define BASE 0
-#define LOWER 1
-#define RAISE 2
-#define ADJUST 3
-#define GAMING 4
+#define GAMING 1
+#define LOWER 2
+#define RAISE 3
+#define ADJUST 4
 
 / {
     // Activate ADJUST layer by pressing raise and lower
@@ -52,6 +52,28 @@
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
+
+    gaming_layer {
+   display-name = "Gaming";
+
+            // ------------------------------------------------------------------------------------------------------------
+            // | ESC   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   | BASE  |
+            // | TAB   |  A  |  Z  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   | BKSPC |
+            // | SHIFT |  Q  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   M   |   '   |
+            // | CTRL  |  W  |  X  |  C   |  V   |  B   |  MUTE  |  |       |  N   |  ,    |  ;    |  :   |   !   | SHIFT |
+            //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
+
+            bindings = <
+&kp ESC    &kp FR_AMPR  &kp FR_EACU    &kp FR_DQUO    &kp FR_QUOT   &kp FR_LPRN                            &kp FR_MINS  &kp FR_EGRV  &kp FR_UNDS   &kp FR_CCED   &kp FR_AGRV   &tog GAMING
+&kp TAB    &kp FR_A     &kp FR_Z       &kp FR_E       &kp FR_R      &kp FR_T                               &kp FR_Y     &kp FR_U     &kp FR_I      &kp FR_O      &kp FR_P      &kp BSPC
+&kp LSHFT  &kp FR_Q     &kp FR_S       &kp FR_D       &kp FR_F      &kp FR_G                               &kp FR_H     &kp FR_J     &kp FR_K      &kp FR_L      &kp FR_M      &kp FR_UGRV
+&kp LCTRL  &kp FR_W     &kp FR_X       &kp FR_C       &kp FR_V      &kp FR_B      &kp C_MUTE    &none      &kp FR_N     &kp FR_COMM  &kp FR_SCLN   &kp FR_COLN   &kp FR_EXLM   &kp RSHFT
+                        &kp LGUI       &kp LALT       &kp LCTRL     &mo LOWER     &kp SPACE       &kp RET  &mo RAISE    &kp RCTRL    &kp RALT      &kp RGUI
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
 
         lower_layer {
             display-name = "Lower";
@@ -115,26 +137,7 @@
         };
 
 
-        gaming_layer {
-   display-name = "Gaming";
-
-            // ------------------------------------------------------------------------------------------------------------
-            // | ESC   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   | BASE  |
-            // | TAB   |  A  |  Z  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   | BKSPC |
-            // | SHIFT |  Q  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   M   |   '   |
-            // | CTRL  |  W  |  X  |  C   |  V   |  B   |  MUTE  |  |       |  N   |  ,    |  ;    |  :   |   !   | SHIFT |
-            //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
-
-            bindings = <
-&kp ESC    &kp FR_AMPR  &kp FR_EACU    &kp FR_DQUO    &kp FR_QUOT   &kp FR_LPRN                            &kp FR_MINS  &kp FR_EGRV  &kp FR_UNDS   &kp FR_CCED   &kp FR_AGRV   &tog GAMING
-&kp TAB    &kp FR_A     &kp FR_Z       &kp FR_E       &kp FR_R      &kp FR_T                               &kp FR_Y     &kp FR_U     &kp FR_I      &kp FR_O      &kp FR_P      &kp BSPC
-&kp LSHFT  &kp FR_Q     &kp FR_S       &kp FR_D       &kp FR_F      &kp FR_G                               &kp FR_H     &kp FR_J     &kp FR_K      &kp FR_L      &kp FR_M      &kp FR_UGRV
-&kp LCTRL  &kp FR_W     &kp FR_X       &kp FR_C       &kp FR_V      &kp FR_B      &kp C_MUTE    &none      &kp FR_N     &kp FR_COMM  &kp FR_SCLN   &kp FR_COLN   &kp FR_EXLM   &kp RSHFT
-                        &kp LGUI       &kp LALT       &kp LCTRL     &mo LOWER     &kp SPACE       &kp RET  &mo RAISE    &kp RCTRL    &kp RALT      &kp RGUI
-            >;
-
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-        };
+    
 
     };
 };
