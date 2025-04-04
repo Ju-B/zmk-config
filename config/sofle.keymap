@@ -18,6 +18,9 @@
 #define LOWER 2
 #define RAISE 3
 #define ADJUST 4
+#define GLOWER 5
+#define GRAISE 6
+#define GADJUST 7
 
 / {
     // Activate ADJUST layer by pressing raise and lower
@@ -63,14 +66,14 @@
             // | TAB   |  A  |  Z  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   | BKSPC |
             // | SHIFT |  Q  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   M   |   '   |
             // | CTRL  |  W  |  X  |  C   |  V   |  B   |  MUTE  |  |       |  N   |  ,    |  ;    |  :   |   !   | SHIFT |
-            //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
+            //               | GUI | ALT  | CTRL | GLOWER|  ENTER |  | SPACE | GRAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
 &kp ESC    &kp FR_AMPR  &kp FR_EACU    &kp FR_DQUO    &kp FR_QUOT   &kp FR_LPRN                            &kp FR_MINS  &kp FR_EGRV  &kp FR_UNDS   &kp FR_CCED   &kp FR_AGRV   &tog GAMING
 &kp TAB    &kp FR_A     &kp FR_Z       &kp FR_E       &kp FR_R      &kp FR_T                               &kp FR_Y     &kp FR_U     &kp FR_I      &kp FR_O      &kp FR_P      &kp BSPC
 &kp LSHFT  &kp FR_Q     &kp FR_S       &kp FR_D       &kp FR_F      &kp FR_G                               &kp FR_H     &kp FR_J     &kp FR_K      &kp FR_L      &kp FR_M      &kp FR_UGRV
 &kp LCTRL  &kp FR_W     &kp FR_X       &kp FR_C       &kp FR_V      &kp FR_B      &kp C_MUTE    &none      &kp FR_N     &kp FR_COMM  &kp FR_SCLN   &kp FR_COLN   &kp FR_EXLM   &kp RSHFT
-                        &kp LGUI       &kp LALT       &kp LCTRL     &mo LOWER     &kp SPACE       &kp RET  &mo RAISE    &kp RCTRL    &kp RALT      &kp RGUI
+                        &kp LGUI       &kp LALT       &kp LCTRL     &mo GLOWER    &kp SPACE     &kp RET    &mo GRAISE   &kp RCTRL    &kp RALT      &kp RGUI
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -138,6 +141,67 @@
             >;
         };
 
+
+        lower_gaming {
+            display-name = "G Lower";
+
+            // TODO: Some binds are waiting for shifted keycode support.
+            // ------------------------------------------------------------------------------------------------------------
+            // |       |  F1 |  F2 |  F3  |  F4  |  F5  |                   |  F6  |  F7   |  F8   |  F9  |  F10  |  F11  |
+            // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |  F12  |
+            // |       |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |   |   |
+            // |       |  =  |  -  |  +   |  {   |  }   |        |  |       |  [   |  ]    |  ;    |  :   |   \   |       |
+            //               |     |      |      |      |        |  |       |      |       |       |      |
+
+            bindings = <
+&trans      &kp F1       &kp F2       &kp F3       &kp F4       &kp F5                            &kp F6       &kp F7       &kp F8        &kp F9       &kp F10      &kp F11
+&kp GRAVE   &kp FR_1     &kp FR_2     &kp FR_3     &kp FR_4     &kp FR_5                          &kp FR_6     &kp FR_7     &kp FR_8      &kp FR_9     &kp FR_0     &kp F12
+&trans      &kp FR_EXLM  &kp FR_AT    &kp FR_HASH  &kp FR_DLR   &kp FR_PERC                       &kp FR_CIRC  &kp FR_AMPR  &kp FR_ASTR  &kp FR_LPRN  &kp FR_RPRN  &kp FR_PIPE
+&trans      &kp FR_EQL   &kp FR_MINS  &kp FR_PLUS  &kp FR_LCBR  &kp FR_RCBR   &trans    &trans    &kp FR_LBRC  &kp FR_RBRC  &kp FR_SCLN   &kp FR_COLN  &kp FR_BSLS  &trans
+                         &trans       &trans       &trans       &trans        &trans    &trans    &trans     &trans    &trans     &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        raise_gaming {
+            display-name = "G Raise";
+
+            // ------------------------------------------------------------------------------------------------------------
+            // | BTCLR | BT1  | BT2  |  BT3  |  BT4  |  BT5 |                |      |      |       |      |       |       |
+            // |       | INS  | PSCR | GUI   |       |      |                | PGUP | HOME |   ^   | END  |       |       |
+            // |       | ALT  | CTRL | SHIFT |       | CAPS |                | PGDN |   <- |   v   |  ->  |  DEL  | BKSPC |
+            // |       | UNDO | CUT  | COPY  | PASTE |      |      |  |      |      |   <  |   -   |   >  |       |       |
+            //                |      |       |       |      |      |  |      |      |      |       |      |
+
+            bindings = <
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &trans     &trans       &trans        &trans       &trans   &trans
+&trans      &kp INS       &kp PSCRN     &kp K_CMENU   &trans        &trans                          &kp PG_UP  &kp HOME     &kp UP        &kp END      &kp N0   &trans
+&trans      &kp LALT      &kp LCTRL     &kp LSHFT     &trans        &kp CLCK                        &kp PG_DN  &kp LEFT     &kp DOWN      &kp RIGHT    &kp DEL  &kp BSPC
+&trans      &kp K_UNDO    &kp K_CUT     &kp K_COPY    &kp K_PASTE   &trans        &trans    &trans  &trans     &kp FR_LABK  &kp FR_MINS  &kp FR_RABK  &trans   &trans
+                          &trans        &trans        &trans        &trans        &trans    &trans  &trans     &trans    &trans    &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        adjust_gaming {
+            // ----------------------------------------------------------------------------------------------------------------------------
+            // | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |      |      |       |      |       |       |
+            // | EXTPWR | RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |      |      |       |      |       |       |
+            // |        | RGB_BRD | RGB_BRI |         |         | gaming  |                  |      |      |       |      |       |       |
+            // | st unl |         |         |         |         |         | RGB_TOG | |      |      |      |       |      |       | st unl|
+            //                    |         |         |         |         |         | |      |      |      |       |      |
+
+            display-name = "G Adjust";
+            bindings = <
+&bt BT_CLR          &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2      &bt BT_SEL 3      &bt BT_SEL 4                               &none  &none  &none  &none  &none  &none
+&ext_power EP_TOG   &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &rgb_ug RGB_SAD   &rgb_ug RGB_SAI   &rgb_ug RGB_EFF                            &none  &none  &none  &none  &none  &none
+&none               &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &none             &out OUT_TOG      &tog GAMING                                &none  &none  &none  &none  &none  &none
+&studio_unlock      &none            &none            &none             &none             &none            &rgb_ug RGB_TOG    &none  &none  &none  &none  &none  &none  &studio_unlock
+                                     &none            &none             &none             &none            &none              &none  &none  &none  &none  &none
+            >;
+        };
 
     
 
