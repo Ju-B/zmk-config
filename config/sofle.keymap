@@ -32,16 +32,14 @@
             if-layers = <LOWER RAISE>;
             then-layer = <ADJUST>;
         };
-    };
 
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-
-        adjust_layer {
+        adjust_gaming {
             if-layers = <GLOWER GRAISE>;
             then-layer = <GADJUST>;
         };
     };
+
+
 
     keymap {
         compatible = "zmk,keymap";
